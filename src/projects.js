@@ -41,4 +41,6 @@ const projects = (() => {
 
 })();
 
+projects.addProject('Default project');
+
 export default projects;
