@@ -1,15 +1,14 @@
 import projects from './projects';
 import todos from './todos';
-
-// projects();
-// todos();
+import dom from './dom';
 
 projects.addProject('Test project');
 
-console.log(projects.projectList);
+todos.addTodo('test', 'test description', new Date(), 'important', false);
+todos.addTodo('test2', 'another test description', new Date(), 'not important', false);
 
-// todos.addTodo('test', 'test description', new Date(), 'important', false);
-// todos.addTodo('test2', 'another test description', new Date(), 'not important', false);
+dom.renderProjects();
+dom.renderTasks(projects.getProjectIndex('Test project'));
 
 // console.log(projects.projectList);
 
