@@ -19,10 +19,6 @@ const projects = (() => {
     return index;
   }
 
-  function setCurrentProjectIndex() {
-    
-  }
-
   function deleteProject(projectIndex) {
     projectList.splice(projectIndex, 1);
   }
