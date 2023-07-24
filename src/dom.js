@@ -6,11 +6,14 @@ const dom = (() => {
   const contentDiv = document.getElementById('content');
 
   function renderProjects() {
+    contentDiv.innerHTML = '';
+    
     const addProjectButton = document.createElement('button');
     addProjectButton.setAttribute('class', 'add-project-button');
     const addProjectImage = document.createElement('img');
     addProjectImage.setAttribute('src', './img/add.svg');
     addProjectButton.appendChild(addProjectImage);
+    addProjectButton.addEventListener('click', handlers.openAddProjectForm);
 
     const projectListDiv = document.createElement('div');
 
@@ -43,11 +46,53 @@ const dom = (() => {
     contentDiv.appendChild(taskListDiv);
   }
 
+  function renderAddProjectForm() {
+    const addProjectFormDiv = document.createElement('div');
+    addProjectFormDiv.setAttribute('id', 'add-project-form');
+
+    const addProjectForm = document.createElement('form');
+    addProjectForm.setAttribute('action', '#');
+    addProjectForm.setAttribute('id', 'form');
+
+    const addProjectTitle = document.createElement('div');
+    addProjectTitle.setAttribute('class', 'form-item');
+
+    const addProjectTitleLabel = document.createElement('label');
+    addProjectTitleLabel.setAttribute('for', 'title');
+
+    const label = document.createTextNode('Project title:');
+    addProjectTitleLabel.appendChild(label);
+
+    const addProjectTitleInput = document.createElement('input');
+    addProjectTitleInput.setAttribute('type', 'text');
+    addProjectTitleInput.setAttribute('id', 'title');
+    addProjectTitleInput.setAttribute('name', 'title');
+
+    const submitButton = document.createElement('button');
+    submitButton.setAttribute('id', 'submit-new-project-form');
+
+    const submitText = document.createTextNode('Submit');
+    submitButton.appendChild(submitText);
+
+    submitButton.addEventListener('click', handlers.addNewProject);
+
+    addProjectTitle.appendChild(addProjectTitleLabel);
+    addProjectTitle.appendChild(addProjectTitleInput);
+
+    addProjectForm.appendChild(addProjectTitle);
+    addProjectForm.appendChild(submitButton);
+
+    addProjectFormDiv.appendChild(addProjectForm);
+
+    contentDiv.appendChild(addProjectFormDiv);
+  }
+
 
 
   return {
     renderProjects,
-    renderTasks
+    renderTasks,
+    renderAddProjectForm,
   }
 
 })();

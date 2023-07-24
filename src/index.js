@@ -11,6 +11,7 @@ todos.addTodo('test2', 'another test description', new Date(), 'not important', 
 dom.renderProjects();
 
 
+
 // dom.renderTasks(projects.getProjectIndex('Test project'));
 
 // console.log(projects.projectList);
