@@ -12,9 +12,9 @@ const todos = (() => {
     }
   }
 
-  function addTodo(title, description, dueDate, priority, completed) {
-    const task = new Todo(title, description, dueDate, priority, completed);
-    (projects.projectList[projects.getProjectIndex('Test project')].tasks).push(task);
+  function addTodo(title, description, dueDate, priority, completed, selectedProjectIndex) {
+    const task = new Todo(title, description, dueDate, priority, completed, selectedProjectIndex);
+    (projects.projectList[selectedProjectIndex].tasks).push(task);
   }
 
   function getTaskIndex(titleInput) {
