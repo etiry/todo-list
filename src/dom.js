@@ -35,29 +35,29 @@ const dom = (() => {
     })
   }
 
-  function renderTasks(projectIndex) {
+  function renderTodos(projectIndex) {
     const todoContainer = document.getElementById('todos');
 
     todoContainer.innerHTML = '';
     
-    const addTaskButton = document.createElement('button');
-    addTaskButton.setAttribute('class', 'add-task-button');
-    const addTaskImage = document.createElement('img');
-    addTaskImage.setAttribute('src', './img/add.svg');
-    addTaskButton.appendChild(addTaskImage);
-    addTaskButton.addEventListener('click', handlers.openAddTaskForm);
+    const addTodoButton = document.createElement('button');
+    addTodoButton.setAttribute('class', 'add-todo-button');
+    const addTodoImage = document.createElement('img');
+    addTodoImage.setAttribute('src', './img/add.svg');
+    addTodoButton.appendChild(addTodoImage);
+    addTodoButton.addEventListener('click', handlers.openAddTodoForm);
 
-    const taskListDiv = document.createElement('div');
+    const todoListDiv = document.createElement('div');
 
-    projects.projectList[projectIndex].tasks.forEach(function (task) {
-      const taskDiv = document.createElement('div');
-      taskDiv.setAttribute('class', 'task-name');
-      taskDiv.innerText = task.title;
-      taskListDiv.appendChild(taskDiv);
+    projects.projectList[projectIndex].todos.forEach(function (todo) {
+      const todoDiv = document.createElement('div');
+      todoDiv.setAttribute('class', 'todo-name');
+      todoDiv.innerText = todo.title;
+      todoListDiv.appendChild(todoDiv);
     })
 
-    todoContainer.appendChild(addTaskButton);
-    todoContainer.appendChild(taskListDiv);
+    todoContainer.appendChild(addTodoButton);
+    todoContainer.appendChild(todoListDiv);
   }
 
   function renderAddProjectForm() {
@@ -101,71 +101,71 @@ const dom = (() => {
     contentDiv.appendChild(addProjectFormDiv);
   }
 
-  function renderAddTaskForm() {
-    const addTaskFormDiv = document.createElement('div');
-    addTaskFormDiv.setAttribute('id', 'add-task-form');
+  function renderAddTodoForm() {
+    const addTodoFormDiv = document.createElement('div');
+    addTodoFormDiv.setAttribute('id', 'add-todo-form');
 
-    const addTaskForm = document.createElement('form');
-    addTaskForm.setAttribute('action', '#');
-    addTaskForm.setAttribute('id', 'form');
+    const addTodoForm = document.createElement('form');
+    addTodoForm.setAttribute('action', '#');
+    addTodoForm.setAttribute('id', 'form');
 
     // title
-    const addTaskTitle = document.createElement('div');
-    addTaskTitle.setAttribute('class', 'form-item');
+    const addTodoTitle = document.createElement('div');
+    addTodoTitle.setAttribute('class', 'form-item');
 
-    const addTaskTitleLabel = document.createElement('label');
-    addTaskTitleLabel.setAttribute('for', 'title');
+    const addTodoTitleLabel = document.createElement('label');
+    addTodoTitleLabel.setAttribute('for', 'title');
 
-    const taskTitleLabel = document.createTextNode('Task title:');
-    addTaskTitleLabel.appendChild(taskTitleLabel);
+    const todoTitleLabel = document.createTextNode('Todo title:');
+    addTodoTitleLabel.appendChild(todoTitleLabel);
 
-    const addTaskTitleInput = document.createElement('input');
-    addTaskTitleInput.setAttribute('type', 'text');
-    addTaskTitleInput.setAttribute('id', 'title');
-    addTaskTitleInput.setAttribute('name', 'title');
+    const addTodoTitleInput = document.createElement('input');
+    addTodoTitleInput.setAttribute('type', 'text');
+    addTodoTitleInput.setAttribute('id', 'title');
+    addTodoTitleInput.setAttribute('name', 'title');
 
     // description
-    const addTaskDescription = document.createElement('div');
-    addTaskDescription.setAttribute('class', 'form-item');
+    const addTodoDescription = document.createElement('div');
+    addTodoDescription.setAttribute('class', 'form-item');
 
-    const addTaskDescriptionLabel = document.createElement('label');
-    addTaskDescriptionLabel.setAttribute('for', 'description');
+    const addTodoDescriptionLabel = document.createElement('label');
+    addTodoDescriptionLabel.setAttribute('for', 'description');
 
-    const taskDescriptionLabel = document.createTextNode('Task description:');
-    addTaskDescriptionLabel.appendChild(taskDescriptionLabel);
+    const todoDescriptionLabel = document.createTextNode('Todo description:');
+    addTodoDescriptionLabel.appendChild(todoDescriptionLabel);
 
-    const addTaskDescriptionInput = document.createElement('textarea');
-    addTaskDescriptionInput.setAttribute('id', 'description');
-    addTaskDescriptionInput.setAttribute('name', 'description');
+    const addTodoDescriptionInput = document.createElement('textarea');
+    addTodoDescriptionInput.setAttribute('id', 'description');
+    addTodoDescriptionInput.setAttribute('name', 'description');
 
     // due date
-    const addTaskDueDate = document.createElement('div');
-    addTaskDueDate.setAttribute('class', 'form-item');
+    const addTodoDueDate = document.createElement('div');
+    addTodoDueDate.setAttribute('class', 'form-item');
 
-    const addTaskDueDateLabel = document.createElement('label');
-    addTaskDueDateLabel.setAttribute('for', 'due-date');
+    const addTodoDueDateLabel = document.createElement('label');
+    addTodoDueDateLabel.setAttribute('for', 'due-date');
 
-    const taskDueDateLabel = document.createTextNode('Task due date:');
-    addTaskDueDateLabel.appendChild(taskDueDateLabel);
+    const todoDueDateLabel = document.createTextNode('Todo due date:');
+    addTodoDueDateLabel.appendChild(todoDueDateLabel);
 
-    const addTaskDueDateInput = document.createElement('input');
-    addTaskDueDateInput.setAttribute('type', 'date');
-    addTaskDueDateInput.setAttribute('id', 'due-date');
-    addTaskDueDateInput.setAttribute('name', 'due-date');
+    const addTodoDueDateInput = document.createElement('input');
+    addTodoDueDateInput.setAttribute('type', 'date');
+    addTodoDueDateInput.setAttribute('id', 'due-date');
+    addTodoDueDateInput.setAttribute('name', 'due-date');
 
     // priority
-    const addTaskPriority = document.createElement('div');
-    addTaskPriority.setAttribute('class', 'form-item');
+    const addTodoPriority = document.createElement('div');
+    addTodoPriority.setAttribute('class', 'form-item');
 
-    const addTaskPriorityLabel = document.createElement('label');
-    addTaskPriorityLabel.setAttribute('for', 'priority');
+    const addTodoPriorityLabel = document.createElement('label');
+    addTodoPriorityLabel.setAttribute('for', 'priority');
 
-    const taskPriorityLabel = document.createTextNode('Task priority:');
-    addTaskPriorityLabel.appendChild(taskPriorityLabel);
+    const todoPriorityLabel = document.createTextNode('Todo priority:');
+    addTodoPriorityLabel.appendChild(todoPriorityLabel);
 
-    const addTaskPriorityInput = document.createElement('select');
-    addTaskPriorityInput.setAttribute('id', 'priority');
-    addTaskPriorityInput.setAttribute('name', 'priority');
+    const addTodoPriorityInput = document.createElement('select');
+    addTodoPriorityInput.setAttribute('id', 'priority');
+    addTodoPriorityInput.setAttribute('name', 'priority');
 
     const options = ['Not urgent', 'Normal', 'Urgent'];
     options.forEach(function (option) {
@@ -173,45 +173,45 @@ const dom = (() => {
       opt.setAttribute('value', option);
       let val = document.createTextNode(option);
       opt.appendChild(val);
-      addTaskPriorityInput.appendChild(opt);
+      addTodoPriorityInput.appendChild(opt);
     })
 
     const submitButton = document.createElement('button');
-    submitButton.setAttribute('id', 'submit-new-task-form');
+    submitButton.setAttribute('id', 'submit-new-todo-form');
 
     const submitText = document.createTextNode('Submit');
     submitButton.appendChild(submitText);
 
-    submitButton.addEventListener('click', handlers.addNewTask);
+    submitButton.addEventListener('click', handlers.addNewTodo);
 
-    addTaskTitle.appendChild(addTaskTitleLabel);
-    addTaskTitle.appendChild(addTaskTitleInput);
+    addTodoTitle.appendChild(addTodoTitleLabel);
+    addTodoTitle.appendChild(addTodoTitleInput);
 
-    addTaskDescription.appendChild(addTaskDescriptionLabel);
-    addTaskDescription.appendChild(addTaskDescriptionInput);
+    addTodoDescription.appendChild(addTodoDescriptionLabel);
+    addTodoDescription.appendChild(addTodoDescriptionInput);
 
-    addTaskDueDate.appendChild(addTaskDueDateLabel);
-    addTaskDueDate.appendChild(addTaskDueDateInput);
+    addTodoDueDate.appendChild(addTodoDueDateLabel);
+    addTodoDueDate.appendChild(addTodoDueDateInput);
 
-    addTaskPriority.appendChild(addTaskPriorityLabel);
-    addTaskPriority.appendChild(addTaskPriorityInput);
+    addTodoPriority.appendChild(addTodoPriorityLabel);
+    addTodoPriority.appendChild(addTodoPriorityInput);
 
-    addTaskForm.appendChild(addTaskTitle);
-    addTaskForm.appendChild(addTaskDescription);
-    addTaskForm.appendChild(addTaskDueDate);
-    addTaskForm.appendChild(addTaskPriority);
-    addTaskForm.appendChild(submitButton);
+    addTodoForm.appendChild(addTodoTitle);
+    addTodoForm.appendChild(addTodoDescription);
+    addTodoForm.appendChild(addTodoDueDate);
+    addTodoForm.appendChild(addTodoPriority);
+    addTodoForm.appendChild(submitButton);
 
-    addTaskFormDiv.appendChild(addTaskForm);
+    addTodoFormDiv.appendChild(addTodoForm);
 
-    contentDiv.appendChild(addTaskFormDiv);
+    contentDiv.appendChild(addTodoFormDiv);
   }
 
   return {
     renderProjects,
-    renderTasks,
+    renderTodos,
     renderAddProjectForm,
-    renderAddTaskForm
+    renderAddTodoForm
   }
 
 })();

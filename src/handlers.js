@@ -8,7 +8,7 @@ const handlers = (() => {
 
   function selectProject(e) {
     selectedProjectIndex = projects.getProjectIndex(e.target.innerText);
-    dom.renderTasks(selectedProjectIndex);
+    dom.renderTodos(selectedProjectIndex);
   }
 
   function addNewProject(e) {
@@ -22,7 +22,7 @@ const handlers = (() => {
     dom.renderProjects();
   }
 
-  function addNewTask(e) {
+  function addNewTodo(e) {
     e.preventDefault();
 
     const title = document.querySelector('input[id=title]');
@@ -32,8 +32,8 @@ const handlers = (() => {
 
     todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
 
-    closeAddTaskForm();
-    dom.renderTasks(selectedProjectIndex); 
+    closeAddTodoForm();
+    dom.renderTodos(selectedProjectIndex); 
   }
 
   function openAddProjectForm() {
@@ -44,22 +44,22 @@ const handlers = (() => {
     document.querySelector('#add-project-form').style.display = 'none';
   }
 
-  function openAddTaskForm() {
-    dom.renderAddTaskForm();
+  function openAddTodoForm() {
+    dom.renderAddTodoForm();
   }
 
-  function closeAddTaskForm() {
-    document.querySelector('#add-task-form').style.display = 'none';
+  function closeAddTodoForm() {
+    document.querySelector('#add-todo-form').style.display = 'none';
   }
 
   return {
     selectProject,
     addNewProject,
-    addNewTask,
+    addNewTodo,
     openAddProjectForm,
     closeAddProjectForm,
-    openAddTaskForm,
-    closeAddTaskForm
+    openAddTodoForm,
+    closeAddTodoForm
   }
 
 })();

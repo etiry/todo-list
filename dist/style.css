@@ -11,12 +11,12 @@
   grid-column: 1;
 }
 
-#tasks {
+#todos {
   grid-column: 2 / end;
 }
 
 #add-project-form,
-#add-task-form {
+#add-todo-form {
   position: fixed;
   left: 50%;
   top: 50%;

@@ -13,21 +13,21 @@ const todos = (() => {
   }
 
   function addTodo(title, description, dueDate, priority, completed, selectedProjectIndex) {
-    const task = new Todo(title, description, dueDate, priority, completed, selectedProjectIndex);
-    (projects.projectList[selectedProjectIndex].tasks).push(task);
+    const todo = new Todo(title, description, dueDate, priority, completed, selectedProjectIndex);
+    (projects.projectList[selectedProjectIndex].todos).push(todo);
   }
 
   function getTaskIndex(titleInput) {
-    const index = projects.projectList[projects.getProjectIndex('Test project')].tasks.map(task => task.title).indexOf(titleInput);
+    const index = projects.projectList[projects.getProjectIndex('Test project')].todos.map(todo => todo.title).indexOf(titleInput);
     return index;
   }
 
-  function deleteTodo(projectIndex, taskIndex) {
-    (projects.projectList[projectIndex].tasks).splice(taskIndex, 1);
+  function deleteTodo(projectIndex, todoIndex) {
+    (projects.projectList[projectIndex].todos).splice(todoIndex, 1);
   }
 
-  function editTodo(projectIndex, taskIndex, prop, value) {
-    projects.projectList[projectIndex].tasks[taskIndex][prop] = value;
+  function editTodo(projectIndex, todoIndex, prop, value) {
+    projects.projectList[projectIndex].todos[todoIndex][prop] = value;
   }
 
   return {
