@@ -1,0 +1,24 @@
+* {
+  border: solid 1px black;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+#projects {
+  grid-column: 1;
+}
+
+#tasks {
+  grid-column: 2 / end;
+}
+
+#add-project-form,
+#add-task-form {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

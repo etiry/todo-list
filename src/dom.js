@@ -6,7 +6,9 @@ const dom = (() => {
   const contentDiv = document.getElementById('content');
 
   function renderProjects() {
-    contentDiv.innerHTML = '';
+    const projectContainer = document.getElementById('projects');
+
+    projectContainer.innerHTML = '';
     
     const addProjectButton = document.createElement('button');
     addProjectButton.setAttribute('class', 'add-project-button');
@@ -24,8 +26,8 @@ const dom = (() => {
       projectListDiv.appendChild(projectDiv);
     })
 
-    contentDiv.appendChild(addProjectButton);
-    contentDiv.appendChild(projectListDiv);
+    projectContainer.appendChild(addProjectButton);
+    projectContainer.appendChild(projectListDiv);
 
     const projectDivs = document.querySelectorAll('.project-name');
     projectDivs.forEach(function (project) {
@@ -34,7 +36,9 @@ const dom = (() => {
   }
 
   function renderTasks(projectIndex) {
-    contentDiv.innerHTML = '';
+    const todoContainer = document.getElementById('todos');
+
+    todoContainer.innerHTML = '';
     
     const addTaskButton = document.createElement('button');
     addTaskButton.setAttribute('class', 'add-task-button');
@@ -52,8 +56,8 @@ const dom = (() => {
       taskListDiv.appendChild(taskDiv);
     })
 
-    contentDiv.appendChild(addTaskButton);
-    contentDiv.appendChild(taskListDiv);
+    todoContainer.appendChild(addTaskButton);
+    todoContainer.appendChild(taskListDiv);
   }
 
   function renderAddProjectForm() {
