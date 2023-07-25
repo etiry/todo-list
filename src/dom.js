@@ -13,7 +13,7 @@ const dom = (() => {
     const addProjectButton = document.createElement('button');
     addProjectButton.setAttribute('class', 'add-project-button');
     const addProjectImage = document.createElement('img');
-    addProjectImage.setAttribute('src', './img/add.svg');
+    addProjectImage.setAttribute('src', './img/add-light.svg');
     addProjectButton.appendChild(addProjectImage);
     addProjectButton.addEventListener('click', handlers.openAddProjectForm);
 

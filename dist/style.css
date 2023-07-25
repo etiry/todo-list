@@ -1,18 +1,26 @@
 * {
-  border: solid 1px black;
+  /* border: solid 1px black; */
+  margin: 0px;
+  padding: 0px;
 }
 
 #content {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  height: 100vh;
 }
 
 #projects {
   grid-column: 1;
+  padding: 24px;
+  background-color: #4a4e69;
+  color: #f2e9e4;
 }
 
 #todos {
   grid-column: 2 / end;
+  padding: 24px;
+  background-color: #f2e9e4;
 }
 
 #add-project-form,
@@ -21,4 +29,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.add-project-button {
+  background-color: #4a4e69;
+  border: none;
 }
