@@ -23,7 +23,10 @@ const dom = (() => {
     addProjectButton.setAttribute('class', 'add-project-button');
     const addProjectImage = document.createElement('img');
     addProjectImage.setAttribute('src', './img/add-light.svg');
+    const addProjectText = document.createElement('h2');
+    addProjectText.innerText = 'Add new project';
     addProjectButton.appendChild(addProjectImage);
+    addProjectButton.appendChild(addProjectText);
     addProjectButton.addEventListener('click', handlers.openAddProjectForm);
 
     const projectListDiv = document.createElement('div');
