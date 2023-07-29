@@ -56,7 +56,10 @@ const dom = (() => {
     addTodoButton.setAttribute('class', 'add-todo-button');
     const addTodoImage = document.createElement('img');
     addTodoImage.setAttribute('src', './img/add.svg');
+    const addTodoText = document.createElement('h2');
+    addTodoText.innerText = 'Add new todo';
     addTodoButton.appendChild(addTodoImage);
+    addTodoButton.appendChild(addTodoText);
     addTodoButton.addEventListener('click', handlers.openAddTodoForm);
 
     const todoListDiv = document.createElement('div');

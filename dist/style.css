@@ -44,6 +44,11 @@ h1 {
   grid-column: 2 / end;
   padding: 24px;
   background-color: #f2e9e4;
+  font-family: "Barlow", sans-serif;
+}
+
+.todo-name {
+  padding: 4px;
 }
 
 #add-project-form,
@@ -54,8 +59,8 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-.add-project-button {
-  background-color: #4a4e69;
+.add-project-button,
+.add-todo-button {
   border: none;
   display: flex;
   align-items: center;
@@ -64,7 +69,15 @@ h1 {
   margin-bottom: 12px;
 }
 
+.add-project-button {
+  background-color: #4a4e69;
+  color: #f2e9e4;
+}
+
+.add-todo-button {
+  background-color: #f2e9e4;
+}
+
 h2 {
   padding-left: 8px;
-  color: #f2e9e4;
 }
