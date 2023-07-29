@@ -5,6 +5,15 @@ const dom = (() => {
 
   const contentDiv = document.getElementById('content');
 
+  function renderHeader() {
+    const header = document.getElementById('header');
+
+    const headerTitle = document.createElement('h1');
+    headerTitle.innerText = 'Todo List';
+
+    header.appendChild(headerTitle);
+  }
+
   function renderProjects() {
     const projectContainer = document.getElementById('projects');
 
@@ -208,6 +217,7 @@ const dom = (() => {
   }
 
   return {
+    renderHeader,
     renderProjects,
     renderTodos,
     renderAddProjectForm,
