@@ -40,11 +40,19 @@ h1 {
   padding: 4px;
 }
 
-#todos {
+#todos-container {
+  display: grid;
+  place-items: center;
   grid-column: 2 / end;
-  padding: 24px;
   background-color: #f2e9e4;
+}
+
+#todos {
+  width: 85%;
+  height: 75%;
+  color: #22223b;
   font-family: "Barlow", sans-serif;
+  padding: 24px;
 }
 
 .todo-name {
@@ -76,6 +84,7 @@ h1 {
 
 .add-todo-button {
   background-color: #f2e9e4;
+  color: #22223b;
 }
 
 h2 {
