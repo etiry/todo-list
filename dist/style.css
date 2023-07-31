@@ -40,6 +40,10 @@ h1 {
   padding: 4px;
 }
 
+.project-name:hover {
+  background-color: #22223b;
+}
+
 #todos-container {
   display: grid;
   place-items: center;
@@ -57,6 +61,11 @@ h1 {
 
 .todo-name {
   padding: 4px;
+}
+
+.todo-name:hover {
+  background-color: #22223b;
+  color: #f2e9e4;
 }
 
 #add-project-form,
@@ -121,6 +130,11 @@ select {
   color: #22223b;
   font-family: "Barlow", sans-serif;
   font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #4a4e69;
+  color: #f2e9e4;
 }
 
 .form-item {
