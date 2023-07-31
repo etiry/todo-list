@@ -60,7 +60,8 @@ h1 {
 }
 
 .todo-name {
-  padding: 4px;
+  padding: 8px;
+  border-bottom: solid 1px #22223b;
 }
 
 .todo-name:hover {
