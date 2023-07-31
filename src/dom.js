@@ -68,6 +68,26 @@ const dom = (() => {
       const todoDiv = document.createElement('div');
       todoDiv.setAttribute('class', 'todo-name');
       todoDiv.innerText = todo.title;
+
+      const iconsDiv = document.createElement('div');
+      iconsDiv.setAttribute('class', 'icons');
+
+      const editIcon = document.createElement('span');
+      editIcon.setAttribute('class', 'material-symbols-outlined');
+      editIcon.innerText = ' edit ';
+      iconsDiv.appendChild(editIcon);
+
+      const deleteIcon = document.createElement('span');
+      deleteIcon.setAttribute('class', 'material-symbols-outlined');
+      deleteIcon.innerText = ' delete ';
+      iconsDiv.appendChild(deleteIcon);
+
+      const markCompletedIcon = document.createElement('span');
+      markCompletedIcon.setAttribute('class', 'material-symbols-outlined');
+      markCompletedIcon.innerText = ' task_alt ';
+      iconsDiv.appendChild(markCompletedIcon);
+
+      todoDiv.appendChild(iconsDiv);
       todoListDiv.appendChild(todoDiv);
     })
 
