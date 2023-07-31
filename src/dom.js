@@ -79,6 +79,11 @@ const dom = (() => {
     const addProjectFormDiv = document.createElement('div');
     addProjectFormDiv.setAttribute('id', 'add-project-form');
 
+    const closeButton = document.createElement('img');
+    closeButton.setAttribute('src', './img/close-light.svg');
+    closeButton.setAttribute('class', 'close-button');
+    closeButton.addEventListener('click', handlers.closeAddProjectForm);
+
     const addProjectForm = document.createElement('form');
     addProjectForm.setAttribute('action', '#');
     addProjectForm.setAttribute('id', 'form');
@@ -98,7 +103,7 @@ const dom = (() => {
     addProjectTitleInput.setAttribute('name', 'title');
 
     const submitButton = document.createElement('button');
-    submitButton.setAttribute('id', 'submit-new-project-form');
+    submitButton.setAttribute('class', 'submit-button');
 
     const submitText = document.createTextNode('Submit');
     submitButton.appendChild(submitText);
@@ -111,6 +116,7 @@ const dom = (() => {
     addProjectForm.appendChild(addProjectTitle);
     addProjectForm.appendChild(submitButton);
 
+    addProjectFormDiv.appendChild(closeButton);
     addProjectFormDiv.appendChild(addProjectForm);
 
     contentDiv.appendChild(addProjectFormDiv);
@@ -119,6 +125,11 @@ const dom = (() => {
   function renderAddTodoForm() {
     const addTodoFormDiv = document.createElement('div');
     addTodoFormDiv.setAttribute('id', 'add-todo-form');
+
+    const closeButton = document.createElement('img');
+    closeButton.setAttribute('src', './img/close-light.svg');
+    closeButton.setAttribute('class', 'close-button');
+    closeButton.addEventListener('click', handlers.closeAddTodoForm);
 
     const addTodoForm = document.createElement('form');
     addTodoForm.setAttribute('action', '#');
@@ -192,7 +203,7 @@ const dom = (() => {
     })
 
     const submitButton = document.createElement('button');
-    submitButton.setAttribute('id', 'submit-new-todo-form');
+    submitButton.setAttribute('class', 'submit-button');
 
     const submitText = document.createTextNode('Submit');
     submitButton.appendChild(submitText);
@@ -217,12 +228,14 @@ const dom = (() => {
     addTodoForm.appendChild(addTodoPriority);
     addTodoForm.appendChild(submitButton);
 
+    addTodoFormDiv.appendChild(closeButton);
     addTodoFormDiv.appendChild(addTodoForm);
 
     contentDiv.appendChild(addTodoFormDiv);
   }
 
   return {
+    contentDiv,
     renderHeader,
     renderProjects,
     renderTodos,

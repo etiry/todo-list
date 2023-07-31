@@ -37,19 +37,37 @@ const handlers = (() => {
   }
 
   function openAddProjectForm() {
-    dom.renderAddProjectForm();
+    if (document.getElementById('add-todo-form')) {
+      closeAddTodoForm();
+    }
+
+    if (!document.getElementById('add-project-form')) {
+      dom.renderAddProjectForm();
+    }
   }
 
   function closeAddProjectForm() {
-    document.querySelector('#add-project-form').style.display = 'none';
+    const contentDiv = document.getElementById('content');
+    const addProjectFormDiv = document.getElementById('add-project-form');
+    contentDiv.removeChild(addProjectFormDiv);
+    // document.querySelector('#add-project-form').style.display = 'none';
   }
 
   function openAddTodoForm() {
-    dom.renderAddTodoForm();
+    if (document.getElementById('add-project-form')) {
+      closeAddProjectForm();
+    }
+
+    if (!document.getElementById('add-todo-form')) {
+      dom.renderAddTodoForm();
+    }
   }
 
   function closeAddTodoForm() {
-    document.querySelector('#add-todo-form').style.display = 'none';
+    const contentDiv = document.getElementById('content');
+    const addTodoFormDiv = document.getElementById('add-todo-form');
+    contentDiv.removeChild(addTodoFormDiv);
+    // document.querySelector('#add-todo-form').style.display = 'none';
   }
 
   return {
