@@ -37,7 +37,7 @@ h1 {
 }
 
 .project-name {
-  padding: 4px;
+  padding: 8px;
 }
 
 .project-name:hover {
@@ -156,5 +156,5 @@ select {
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 12;
-  margin: 4px;
+  margin: 4px 8px;
 }
