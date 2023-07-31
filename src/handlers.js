@@ -16,10 +16,13 @@ const handlers = (() => {
 
     const title = document.querySelector('input[id=title]');
 
-    projects.addProject(title.value);
-
-    closeAddProjectForm();
-    dom.renderProjects();
+    if (title.reportValidity()) {
+      projects.addProject(title.value);
+      closeAddProjectForm();
+      dom.renderProjects();
+    } else {
+      return;
+    }
   }
 
   function addNewTodo(e) {
@@ -30,10 +33,14 @@ const handlers = (() => {
     const dueDate = document.querySelector('input[id=due-date]');
     const priority = document.querySelector('select[id=priority]');
 
-    todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
+    if (title.reportValidity()) {
+      todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
+      closeAddTodoForm();
+      dom.renderTodos(selectedProjectIndex); 
+    } else {
+      return;
+    }
 
-    closeAddTodoForm();
-    dom.renderTodos(selectedProjectIndex); 
   }
 
   function openAddProjectForm() {

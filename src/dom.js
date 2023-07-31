@@ -101,6 +101,7 @@ const dom = (() => {
     addProjectTitleInput.setAttribute('type', 'text');
     addProjectTitleInput.setAttribute('id', 'title');
     addProjectTitleInput.setAttribute('name', 'title');
+    addProjectTitleInput.required = true;
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('class', 'submit-button');
@@ -149,6 +150,7 @@ const dom = (() => {
     addTodoTitleInput.setAttribute('type', 'text');
     addTodoTitleInput.setAttribute('id', 'title');
     addTodoTitleInput.setAttribute('name', 'title');
+    addTodoTitleInput.required = true;
 
     // description
     const addTodoDescription = document.createElement('div');
