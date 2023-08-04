@@ -1,4 +1,5 @@
 import projects from './projects';
+import todos from './todos';
 import handlers from './handlers';
 
 const dom = (() => {
@@ -67,6 +68,8 @@ const dom = (() => {
     projects.projectList[projectIndex].todos.forEach(function (todo) {
       const todoDiv = document.createElement('div');
       todoDiv.setAttribute('class', 'todo-name');
+      todoDiv.setAttribute('data-todo-index', todo.index);
+      todoDiv.setAttribute('data-project-index', todo.projectIndex);
       todoDiv.innerText = todo.title;
 
       const iconsDiv = document.createElement('div');
@@ -89,6 +92,8 @@ const dom = (() => {
 
       todoDiv.appendChild(iconsDiv);
       todoListDiv.appendChild(todoDiv);
+
+      deleteIcon.addEventListener('click', deleteTodo);
     })
 
     todoContainer.appendChild(addTodoButton);
@@ -254,6 +259,15 @@ const dom = (() => {
     addTodoFormDiv.appendChild(addTodoForm);
 
     contentDiv.appendChild(addTodoFormDiv);
+  }
+
+  function deleteTodo (e) {
+    const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
+    const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
+
+    todos.deleteTodo(projectIndex, todoIndex);
+
+    renderTodos(projectIndex);
   }
 
   return {

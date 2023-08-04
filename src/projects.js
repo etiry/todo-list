@@ -4,6 +4,7 @@ const projects = (() => {
     constructor(title) {
       this.title = title;
       this.todos = [];
+      this.projectIndex = null;
     }
   }
 
@@ -12,6 +13,7 @@ const projects = (() => {
   function addProject(title) {
     const project = new Project(title);
     projectList.push(project);
+    project.index = projectList.indexOf(project);
   }
 
   function getProjectIndex(titleInput) {
