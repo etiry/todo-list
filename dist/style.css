@@ -154,7 +154,7 @@ select {
   margin-bottom: -24px;
 }
 
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 12;
+.fa-regular,
+.fa-solid {
   margin: 4px 8px;
 }

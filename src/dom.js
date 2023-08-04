@@ -74,30 +74,18 @@ const dom = (() => {
 
       const iconsDiv = document.createElement('div');
       iconsDiv.setAttribute('class', 'icons');
-
-      const editIcon = document.createElement('span');
-      editIcon.setAttribute('class', 'material-symbols-outlined');
-      editIcon.innerText = ' edit ';
-      iconsDiv.appendChild(editIcon);
-
-      const deleteIcon = document.createElement('span');
-      deleteIcon.setAttribute('class', 'material-symbols-outlined');
-      deleteIcon.innerText = ' delete ';
-      iconsDiv.appendChild(deleteIcon);
-
-      const markCompletedIcon = document.createElement('span');
-      markCompletedIcon.setAttribute('class', 'material-symbols-outlined');
-      markCompletedIcon.innerText = ' task_alt ';
-      iconsDiv.appendChild(markCompletedIcon);
+      iconsDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i>';
 
       todoDiv.appendChild(iconsDiv);
       todoListDiv.appendChild(todoDiv);
 
-      deleteIcon.addEventListener('click', deleteTodo);
     })
 
     todoContainer.appendChild(addTodoButton);
     todoContainer.appendChild(todoListDiv);
+
+    addDeleteTodoEventListeners();
+    addToggleCompleteTodoEventListeners();
   }
 
   function renderAddProjectForm() {
@@ -261,13 +249,16 @@ const dom = (() => {
     contentDiv.appendChild(addTodoFormDiv);
   }
 
-  function deleteTodo (e) {
-    const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
-    const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
+  function addDeleteTodoEventListeners () {
+    const deleteIcons = document.querySelectorAll('.fa-trash');
 
-    todos.deleteTodo(projectIndex, todoIndex);
+    deleteIcons.forEach((icon) => icon.addEventListener('click', handlers.deleteTodo));
+  }
 
-    renderTodos(projectIndex);
+  function addToggleCompleteTodoEventListeners () {
+    const completedIcons = document.querySelectorAll('.fa-circle-check');
+
+    completedIcons.forEach((icon) => icon.addEventListener('click', handlers.toggleComplete));
   }
 
   return {

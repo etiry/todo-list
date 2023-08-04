@@ -77,6 +77,30 @@ const handlers = (() => {
     // document.querySelector('#add-todo-form').style.display = 'none';
   }
 
+  function deleteTodo (e) {
+    const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
+    const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
+
+    todos.deleteTodo(projectIndex, todoIndex);
+
+    dom.renderTodos(projectIndex);
+  }
+
+  function toggleComplete (e) {
+    if (e.target.classList.contains('fa-regular')) {
+      e.target.classList.remove('fa-regular');
+      e.target.classList.add('fa-solid');
+    } else {
+      e.target.classList.remove('fa-solid');
+      e.target.classList.add('fa-regular');
+    }
+
+    const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
+    const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
+
+    todos.toggleComplete(projectIndex, todoIndex);
+  }
+
   return {
     selectProject,
     addNewProject,
@@ -84,7 +108,9 @@ const handlers = (() => {
     openAddProjectForm,
     closeAddProjectForm,
     openAddTodoForm,
-    closeAddTodoForm
+    closeAddTodoForm,
+    deleteTodo,
+    toggleComplete
   }
 
 })();

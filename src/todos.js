@@ -33,6 +33,14 @@ const todos = (() => {
     todoList.forEach((todo) => todo.index = todoList.indexOf(todo))
   }
 
+  function toggleComplete(projectIndex, todoIndex) {
+    if (projects.projectList[projectIndex].todos[todoIndex].completed === false) {
+      projects.projectList[projectIndex].todos[todoIndex].completed = true;
+    } else {
+      projects.projectList[projectIndex].todos[todoIndex].completed = false;
+    }
+  }
+
   function editTodo(projectIndex, todoIndex, prop, value) {
     projects.projectList[projectIndex].todos[todoIndex][prop] = value;
   }
@@ -40,6 +48,7 @@ const todos = (() => {
   return {
     addTodo,
     deleteTodo,
+    toggleComplete,
     getTodoIndex,
     editTodo
   }
