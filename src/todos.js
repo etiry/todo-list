@@ -1,4 +1,5 @@
 import projects from './projects';
+import { format } from 'date-fns';
 
 const todos = (() => {
 
@@ -6,7 +7,7 @@ const todos = (() => {
     constructor(title, description, dueDate, priority, completed, projectIndex) {
       this.title = title;
       this.description = description;
-      this.dueDate = new Date(dueDate);
+      this.dueDate = format(new Date(dueDate), 'yyyy-MM-dd');
       this.priority = priority;
       this.completed = completed;
       this.projectIndex = projectIndex;
