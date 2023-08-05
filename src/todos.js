@@ -6,7 +6,7 @@ const todos = (() => {
     constructor(title, description, dueDate, priority, completed, projectIndex) {
       this.title = title;
       this.description = description;
-      this.dueDate = dueDate;
+      this.dueDate = new Date(dueDate);
       this.priority = priority;
       this.completed = completed;
       this.projectIndex = projectIndex;
@@ -34,15 +34,15 @@ const todos = (() => {
   }
 
   function toggleComplete(projectIndex, todoIndex) {
-    if (projects.projectList[projectIndex].todos[todoIndex].completed === false) {
-      projects.projectList[projectIndex].todos[todoIndex].completed = true;
-    } else {
-      projects.projectList[projectIndex].todos[todoIndex].completed = false;
-    }
+    projects.projectList[projectIndex].todos[todoIndex].completed = !projects.projectList[projectIndex].todos[todoIndex].completed
   }
 
-  function editTodo(projectIndex, todoIndex, prop, value) {
-    projects.projectList[projectIndex].todos[todoIndex][prop] = value;
+  function editTodo(title, description, dueDate, priority, projectIndex, todoIndex) {
+    const todo = projects.projectList[projectIndex].todos[todoIndex];
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
   }
 
   return {

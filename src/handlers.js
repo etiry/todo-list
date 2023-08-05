@@ -20,12 +20,10 @@ const handlers = (() => {
       projects.addProject(title.value);
       closeAddProjectForm();
       dom.renderProjects();
-    } else {
-      return;
     }
   }
 
-  function addNewTodo(e) {
+  function submitTodoForm(e) {
     e.preventDefault();
 
     const title = document.querySelector('input[id=title]');
@@ -34,13 +32,16 @@ const handlers = (() => {
     const priority = document.querySelector('select[id=priority]');
 
     if (title.reportValidity()) {
-      todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
-      closeAddTodoForm();
-      dom.renderTodos(selectedProjectIndex); 
-    } else {
-      return;
+      if (e.target.id === 'edit-todo-submit-button') {
+        const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
+        todos.editTodo(title.value, description.value, dueDate.value, priority.value, selectedProjectIndex, todoIndex);
+      } else {
+        todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
+      }
+    
+    closeAddTodoForm();
+    dom.renderTodos(selectedProjectIndex); 
     }
-
   }
 
   function openAddProjectForm() {
@@ -57,16 +58,22 @@ const handlers = (() => {
     const contentDiv = document.getElementById('content');
     const addProjectFormDiv = document.getElementById('add-project-form');
     contentDiv.removeChild(addProjectFormDiv);
-    // document.querySelector('#add-project-form').style.display = 'none';
   }
 
-  function openAddTodoForm() {
+  function openAddTodoForm(e) {
     if (document.getElementById('add-project-form')) {
       closeAddProjectForm();
     }
 
     if (!document.getElementById('add-todo-form')) {
-      dom.renderAddTodoForm();
+      if (e.target.classList.contains('fa-pen-to-square')) {
+        const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
+        const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
+
+        dom.renderAddTodoForm(projectIndex, todoIndex);
+      } else {
+        dom.renderAddTodoForm();
+      } 
     }
   }
 
@@ -74,7 +81,6 @@ const handlers = (() => {
     const contentDiv = document.getElementById('content');
     const addTodoFormDiv = document.getElementById('add-todo-form');
     contentDiv.removeChild(addTodoFormDiv);
-    // document.querySelector('#add-todo-form').style.display = 'none';
   }
 
   function deleteTodo (e) {
@@ -104,7 +110,7 @@ const handlers = (() => {
   return {
     selectProject,
     addNewProject,
-    addNewTodo,
+    submitTodoForm,
     openAddProjectForm,
     closeAddProjectForm,
     openAddTodoForm,

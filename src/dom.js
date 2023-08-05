@@ -86,6 +86,7 @@ const dom = (() => {
 
     addDeleteTodoEventListeners();
     addToggleCompleteTodoEventListeners();
+    addEditTodoEventListeners();
   }
 
   function renderAddProjectForm() {
@@ -136,7 +137,7 @@ const dom = (() => {
     contentDiv.appendChild(addProjectFormDiv);
   }
 
-  function renderAddTodoForm() {
+  function renderAddTodoForm(projectIndex, todoIndex) {
     const addTodoFormDiv = document.createElement('div');
     addTodoFormDiv.setAttribute('id', 'add-todo-form');
 
@@ -223,7 +224,7 @@ const dom = (() => {
     const submitText = document.createTextNode('Submit');
     submitButton.appendChild(submitText);
 
-    submitButton.addEventListener('click', handlers.addNewTodo);
+    submitButton.addEventListener('click', handlers.submitTodoForm);
 
     addTodoTitle.appendChild(addTodoTitleLabel);
     addTodoTitle.appendChild(addTodoTitleInput);
@@ -247,6 +248,17 @@ const dom = (() => {
     addTodoFormDiv.appendChild(addTodoForm);
 
     contentDiv.appendChild(addTodoFormDiv);
+
+    if (arguments.length === 2) {
+      const todo = projects.projectList[projectIndex].todos[todoIndex];
+      addTodoTitleInput.value = todo.title;
+      addTodoDescriptionInput.value = todo.description;
+      addTodoDueDateInput.value = todo.dueDate;
+      addTodoPriorityInput.value = todo.priority;
+
+      submitButton.setAttribute('id', 'edit-todo-submit-button');
+      addTodoFormDiv.setAttribute('data-todo-index', todoIndex);
+    }
   }
 
   function addDeleteTodoEventListeners () {
@@ -259,6 +271,12 @@ const dom = (() => {
     const completedIcons = document.querySelectorAll('.fa-circle-check');
 
     completedIcons.forEach((icon) => icon.addEventListener('click', handlers.toggleComplete));
+  }
+
+  function addEditTodoEventListeners () {
+    const editIcons = document.querySelectorAll('.fa-pen-to-square');
+
+    editIcons.forEach((icon) => icon.addEventListener('click', handlers.openAddTodoForm));
   }
 
   return {
