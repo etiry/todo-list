@@ -158,3 +158,13 @@ select {
 .fa-solid {
   margin: 4px 8px;
 }
+
+.todo-details {
+  padding: 8px;
+  margin-left: 8px;
+  border-bottom: solid 1px #22223b;
+}
+
+.details-label {
+  font-weight: bold;
+}

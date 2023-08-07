@@ -107,6 +107,25 @@ const handlers = (() => {
     todos.toggleComplete(projectIndex, todoIndex);
   }
 
+  function toggleTodoDetails (e) {
+    const todoDiv = e.target;
+
+    if (todoDiv.nextElementSibling) {
+      if (todoDiv.nextElementSibling.classList.contains('todo-details')) {
+      todoDiv.nextElementSibling.remove();
+      } else {
+        const todoIndex = e.target.dataset.todoIndex;
+        const projectIndex = e.target.dataset.projectIndex;
+        dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
+      }
+    } else {
+      const todoIndex = e.target.dataset.todoIndex;
+      const projectIndex = e.target.dataset.projectIndex;
+      dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
+    }
+    
+  }
+
   return {
     selectProject,
     addNewProject,
@@ -116,7 +135,8 @@ const handlers = (() => {
     openAddTodoForm,
     closeAddTodoForm,
     deleteTodo,
-    toggleComplete
+    toggleComplete,
+    toggleTodoDetails
   }
 
 })();

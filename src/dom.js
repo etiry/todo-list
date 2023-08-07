@@ -84,9 +84,18 @@ const dom = (() => {
     todoContainer.appendChild(addTodoButton);
     todoContainer.appendChild(todoListDiv);
 
+    addToggleTodoDetailsEventListeners();
     addDeleteTodoEventListeners();
     addToggleCompleteTodoEventListeners();
     addEditTodoEventListeners();
+  }
+
+  function renderTodoDetails (todoDiv, projectIndex, todoIndex) {
+    const todo = projects.projectList[projectIndex].todos[todoIndex];
+
+    const detailsTemplate = `<div class="todo-details"><div class="todo-details-title"><span class="details-label">Title: </span>${todo.title}</div><div class="todo-details-description"><span class="details-label">Description: </span>${todo.description}</div><div class="todo-details-due-date"><span class="details-label">Due Date: </span>${todo.dueDate}</div><div class="todo-details-priority"><span class="details-label">Priority: </span>${todo.priority}</div><div class="todo-details-completed"><span class="details-label">Completed: </span>${todo.completed ? `Yes` : `No`}</div>`
+
+    todoDiv.insertAdjacentHTML('afterend', detailsTemplate);
   }
 
   function renderAddProjectForm() {
@@ -261,6 +270,12 @@ const dom = (() => {
     }
   }
 
+  function addToggleTodoDetailsEventListeners () {
+    const todoDivs = document.querySelectorAll('.todo-name');
+
+    todoDivs.forEach((todo) => todo.addEventListener('click', handlers.toggleTodoDetails));
+  }
+
   function addDeleteTodoEventListeners () {
     const deleteIcons = document.querySelectorAll('.fa-trash');
 
@@ -284,6 +299,7 @@ const dom = (() => {
     renderHeader,
     renderProjects,
     renderTodos,
+    renderTodoDetails,
     renderAddProjectForm,
     renderAddTodoForm
   }
