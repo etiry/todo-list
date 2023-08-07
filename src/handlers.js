@@ -108,11 +108,12 @@ const handlers = (() => {
   }
 
   function toggleTodoDetails (e) {
-    const todoDiv = e.target;
+    if (e.target.classList.contains('todo-name')) {
+      const todoDiv = e.target;
 
-    if (todoDiv.nextElementSibling) {
-      if (todoDiv.nextElementSibling.classList.contains('todo-details')) {
-      todoDiv.nextElementSibling.remove();
+      if (todoDiv.nextElementSibling) {
+        if (todoDiv.nextElementSibling.classList.contains('todo-details')) {
+        todoDiv.nextElementSibling.remove();
       } else {
         const todoIndex = e.target.dataset.todoIndex;
         const projectIndex = e.target.dataset.projectIndex;
@@ -123,8 +124,8 @@ const handlers = (() => {
       const projectIndex = e.target.dataset.projectIndex;
       dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
     }
-    
   }
+}
 
   return {
     selectProject,
