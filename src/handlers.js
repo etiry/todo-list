@@ -7,7 +7,7 @@ const handlers = (() => {
   let projectIndex = 0;
 
   function selectProject(e) {
-    if (e.target.classList.contains('.project-name')) {
+    if (e.target.classList.contains('project-name')) {
       projectIndex = e.target.dataset.projectIndex;
       dom.renderTodos(projectIndex);
     }

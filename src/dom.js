@@ -43,11 +43,7 @@ const dom = (() => {
     projectContainer.appendChild(addProjectButton);
     projectContainer.appendChild(projectListDiv);
 
-    const projectDivs = document.querySelectorAll('.project-name');
-    projectDivs.forEach(function (project) {
-      project.addEventListener('click', handlers.selectProject);
-    })
-
+    addSelectProjectEventListeners();
     addEditProjectEventListeners();
   }
 
@@ -286,6 +282,11 @@ const dom = (() => {
       submitButton.setAttribute('id', 'edit-todo-submit-button');
       addTodoFormDiv.setAttribute('data-todo-index', todoIndex);
     }
+  }
+
+  function addSelectProjectEventListeners () {
+    const projectDivs = document.querySelectorAll('.project-name');
+    projectDivs.forEach((project) => project.addEventListener('click', handlers.selectProject));
   }
 
   function addToggleTodoDetailsEventListeners () {
