@@ -35,7 +35,8 @@ const dom = (() => {
     projects.projectList.forEach(function (project) {
       const projectDiv = document.createElement('div');
       projectDiv.setAttribute('class', 'project-name');
-      projectDiv.innerText = project.title;
+      projectDiv.setAttribute('data-project-index', project.projectIndex);
+      projectDiv.innerHTML = `${project.title} <i class="fa-solid fa-pen-to-square edit-project"></i>`;
       projectListDiv.appendChild(projectDiv);
     })
 
@@ -46,6 +47,8 @@ const dom = (() => {
     projectDivs.forEach(function (project) {
       project.addEventListener('click', handlers.selectProject);
     })
+
+    addEditProjectEventListeners();
   }
 
   function renderTodos(projectIndex) {
@@ -74,7 +77,7 @@ const dom = (() => {
 
       const iconsDiv = document.createElement('div');
       iconsDiv.setAttribute('class', 'icons');
-      iconsDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i>';
+      iconsDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square edit-todo"></i> <i class="fa-solid fa-trash"></i>';
 
       todoDiv.appendChild(iconsDiv);
       todoListDiv.appendChild(todoDiv);
@@ -98,7 +101,7 @@ const dom = (() => {
     todoDiv.insertAdjacentHTML('afterend', detailsTemplate);
   }
 
-  function renderAddProjectForm() {
+  function renderAddProjectForm(projectIndex) {
     const addProjectFormDiv = document.createElement('div');
     addProjectFormDiv.setAttribute('id', 'add-project-form');
 
@@ -132,8 +135,6 @@ const dom = (() => {
     const submitText = document.createTextNode('Submit');
     submitButton.appendChild(submitText);
 
-    submitButton.addEventListener('click', handlers.addNewProject);
-
     addProjectTitle.appendChild(addProjectTitleLabel);
     addProjectTitle.appendChild(addProjectTitleInput);
 
@@ -144,6 +145,23 @@ const dom = (() => {
     addProjectFormDiv.appendChild(addProjectForm);
 
     contentDiv.appendChild(addProjectFormDiv);
+
+    if (arguments.length === 1) {
+      const project = projects.projectList[projectIndex];
+      addProjectTitleInput.value = project.title
+
+      submitButton.setAttribute('id', 'edit-project-submit-button');
+      addProjectFormDiv.setAttribute('data-project-index', projectIndex);
+    }
+
+    submitButton.addEventListener('click', function (e) {
+      if (e.target.id === 'edit-project-submit-button') {
+        handlers.submitProjectForm(e, projectIndex);
+      } else {
+        handlers.submitProjectForm(e);
+      }
+      
+    });
   }
 
   function renderAddTodoForm(projectIndex, todoIndex) {
@@ -289,9 +307,15 @@ const dom = (() => {
   }
 
   function addEditTodoEventListeners () {
-    const editIcons = document.querySelectorAll('.fa-pen-to-square');
+    const editIcons = document.querySelectorAll('.fa-pen-to-square.edit-todo');
 
     editIcons.forEach((icon) => icon.addEventListener('click', handlers.openAddTodoForm));
+  }
+
+  function addEditProjectEventListeners () {
+    const editIcons = document.querySelectorAll('.fa-pen-to-square.edit-project');
+
+    editIcons.forEach((icon) => icon.addEventListener('click', handlers.openAddProjectForm));
   }
 
   return {

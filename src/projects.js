@@ -13,7 +13,7 @@ const projects = (() => {
   function addProject(title) {
     const project = new Project(title);
     projectList.push(project);
-    project.index = projectList.indexOf(project);
+    project.projectIndex = projectList.indexOf(project);
   }
 
   function getProjectIndex(titleInput) {
@@ -25,8 +25,9 @@ const projects = (() => {
     projectList.splice(projectIndex, 1);
   }
 
-  function editProject(projectIndex, prop, value) {
-    projectList[projectIndex][prop] = value;
+  function editProject(newTitle, projectIndex) {
+    const project = projectList[projectIndex];
+    project.title = newTitle;
   }
 
   return {

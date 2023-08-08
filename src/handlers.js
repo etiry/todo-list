@@ -4,20 +4,27 @@ import todos from './todos';
 
 const handlers = (() => {
 
-  let selectedProjectIndex = 0;
+  let projectIndex = 0;
 
   function selectProject(e) {
-    selectedProjectIndex = projects.getProjectIndex(e.target.innerText);
-    dom.renderTodos(selectedProjectIndex);
+    if (e.target.classList.contains('.project-name')) {
+      projectIndex = e.target.dataset.projectIndex;
+      dom.renderTodos(projectIndex);
+    }
   }
 
-  function addNewProject(e) {
+  function submitProjectForm(e, projectIndex) {
     e.preventDefault();
 
     const title = document.querySelector('input[id=title]');
 
     if (title.reportValidity()) {
-      projects.addProject(title.value);
+      if (e.target.id === 'edit-project-submit-button') {
+        projects.editProject(title.value, projectIndex);
+      } else {
+        projects.addProject(title.value);
+      }
+      
       closeAddProjectForm();
       dom.renderProjects();
     }
@@ -44,13 +51,17 @@ const handlers = (() => {
     }
   }
 
-  function openAddProjectForm() {
+  function openAddProjectForm(e) {
     if (document.getElementById('add-todo-form')) {
       closeAddTodoForm();
     }
 
     if (!document.getElementById('add-project-form')) {
-      dom.renderAddProjectForm();
+      if (e.target.classList.contains('edit-project')) {
+        dom.renderAddProjectForm(e.target.parentElement.dataset.projectIndex);
+      } else {
+        dom.renderAddProjectForm();
+      }
     }
   }
 
@@ -129,7 +140,7 @@ const handlers = (() => {
 
   return {
     selectProject,
-    addNewProject,
+    submitProjectForm,
     submitTodoForm,
     openAddProjectForm,
     closeAddProjectForm,
