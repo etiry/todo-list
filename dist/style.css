@@ -84,6 +84,7 @@ h1 {
   border-radius: 8px;
   padding: 24px;
   width: 25%;
+  min-width: 300px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "Barlow", sans-serif;
   font-size: 18px;
@@ -151,7 +152,7 @@ select {
   width: 25px;
   display: flex;
   justify-self: end;
-  margin-bottom: -24px;
+  /* margin-bottom: -24px; */
 }
 
 .fa-regular,
