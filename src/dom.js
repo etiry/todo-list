@@ -16,6 +16,13 @@ const dom = (() => {
   }
 
   function renderProjects() {
+    if (!localStorage.getItem('projects')) {
+      projects.addProject('Default project');
+    } else {
+      const projectsFromStorage = JSON.parse(localStorage.getItem('projects'));
+      projects.projectList = projectsFromStorage;
+    }
+
     const projectContainer = document.getElementById('projects');
 
     projectContainer.innerHTML = '';

@@ -24,7 +24,7 @@ const handlers = (() => {
       } else {
         projects.addProject(title.value);
       }
-      
+
       closeAddProjectForm();
       dom.renderProjects();
     }
@@ -41,13 +41,14 @@ const handlers = (() => {
     if (title.reportValidity()) {
       if (e.target.id === 'edit-todo-submit-button') {
         const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
-        todos.editTodo(title.value, description.value, dueDate.value, priority.value, selectedProjectIndex, todoIndex);
+        todos.editTodo(title.value, description.value, dueDate.value, priority.value, projectIndex, todoIndex);
       } else {
-        todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, selectedProjectIndex);
+        todos.addTodo(title.value, description.value, dueDate.value, priority.value, false, projectIndex);
       }
     
+    localStorage.setItem('projects', JSON.stringify(projects.projectList));
     closeAddTodoForm();
-    dom.renderTodos(selectedProjectIndex); 
+    dom.renderTodos(projectIndex); 
     }
   }
 
@@ -99,6 +100,7 @@ const handlers = (() => {
     const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
 
     todos.deleteTodo(projectIndex, todoIndex);
+    localStorage.setItem('projects', JSON.stringify(projects.projectList));
 
     dom.renderTodos(projectIndex);
   }
@@ -116,6 +118,7 @@ const handlers = (() => {
     const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
 
     todos.toggleComplete(projectIndex, todoIndex);
+    localStorage.setItem('projects', JSON.stringify(projects.projectList));
   }
 
   function toggleTodoDetails (e) {

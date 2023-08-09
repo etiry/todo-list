@@ -26,8 +26,13 @@ const projects = (() => {
   }
 
   function editProject(newTitle, projectIndex) {
+    const projectsFromStorage = JSON.parse(localStorage.getItem('projects'));
+    projectList = projectsFromStorage;
+
     const project = projectList[projectIndex];
     project.title = newTitle;
+
+    localStorage.setItem('projects', JSON.stringify(projectList));
   }
 
   return {
@@ -39,7 +44,5 @@ const projects = (() => {
   }
 
 })();
-
-projects.addProject('Default project');
 
 export default projects;
