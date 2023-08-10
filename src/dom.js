@@ -8,14 +8,11 @@ const dom = (() => {
 
   function renderHeader() {
     const header = document.getElementById('header');
-
-    const headerTitle = document.createElement('h1');
-    headerTitle.innerText = 'Todo List';
-
-    header.appendChild(headerTitle);
+    header.innerHTML = `<h1>Todo List</h1>`;
   }
 
   function renderProjects() {
+    // get projects from local storage if they exist
     if (!localStorage.getItem('projects')) {
       projects.addProject('Default project');
     } else {
@@ -24,75 +21,62 @@ const dom = (() => {
     }
 
     const projectContainer = document.getElementById('projects');
-
-    projectContainer.innerHTML = '';
-    
-    const addProjectButton = document.createElement('button');
-    addProjectButton.setAttribute('class', 'add-project-button');
-    const addProjectImage = document.createElement('img');
-    addProjectImage.setAttribute('src', './img/add-light.svg');
-    const addProjectText = document.createElement('h2');
-    addProjectText.innerText = 'Add new project';
-    addProjectButton.appendChild(addProjectImage);
-    addProjectButton.appendChild(addProjectText);
-    addProjectButton.addEventListener('click', handlers.openAddProjectForm);
-
     const projectListDiv = document.createElement('div');
 
-    projects.projectList.forEach(function (project) {
-      const projectDiv = document.createElement('div');
-      projectDiv.setAttribute('class', 'project-name');
-      projectDiv.setAttribute('data-project-index', project.projectIndex);
-      projectDiv.innerHTML = `${project.title} <i class="fa-solid fa-pen-to-square edit-project"></i>`;
-      projectListDiv.appendChild(projectDiv);
+    const addProjectTemplate = `
+      <button class="add-project-button">
+        <i class="fa-solid fa-plus"></i>
+        <h2>Add new project</h2>
+      </button>`;
+
+    projects.projectList.forEach((project) => {
+      const template = `
+        <div class="project-name" data-project-index=${project.projectIndex}>
+          ${project.title} <i class="fa-solid fa-pen-to-square edit-project"></i>
+        </div>`;
+
+      projectListDiv.insertAdjacentHTML('beforeend', template);
     })
 
-    projectContainer.appendChild(addProjectButton);
-    projectContainer.appendChild(projectListDiv);
+    projectContainer.innerHTML = '';
+    projectContainer.insertAdjacentHTML('beforeend', addProjectTemplate);
+    projectContainer.insertAdjacentElement('beforeend', projectListDiv);
 
+    addAddNewProjectEventListener();
     addSelectProjectEventListeners();
     addEditProjectEventListeners();
   }
 
   function renderTodos(projectIndex) {
     const todoContainer = document.getElementById('todos');
-
-    todoContainer.innerHTML = '';
-    
-    const addTodoButton = document.createElement('button');
-    addTodoButton.setAttribute('class', 'add-todo-button');
-    const addTodoImage = document.createElement('img');
-    addTodoImage.setAttribute('src', './img/add.svg');
-    const addTodoText = document.createElement('h2');
-    addTodoText.innerText = 'Add new todo';
-    addTodoButton.appendChild(addTodoImage);
-    addTodoButton.appendChild(addTodoText);
-    addTodoButton.addEventListener('click', handlers.openAddTodoForm);
-
     const todoListDiv = document.createElement('div');
 
+    const addTodoTemplate = `
+    <button class="add-todo-button">
+      <i class="fa-solid fa-plus"></i>
+      <h2>Add new todo</h2>
+    </button>`;
+
     projects.projectList[projectIndex].todos.forEach(function (todo) {
-      const todoDiv = document.createElement('div');
-      todoDiv.setAttribute('class', 'todo-name');
-      todoDiv.setAttribute('data-todo-index', todo.index);
-      todoDiv.setAttribute('data-project-index', todo.projectIndex);
-      todoDiv.innerText = todo.title;
+      const template = `
+        <div class="todo-name" data-todo-index=${todo.index} data-project-index=${todo.projectIndex}>
+          ${todo.title}
+          <div class="icons">
+            <i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square edit-todo"></i> <i class="fa-solid fa-trash"></i>
+          </div>
+        </div>`
 
-      const iconsDiv = document.createElement('div');
-      iconsDiv.setAttribute('class', 'icons');
-      iconsDiv.innerHTML = '<i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square edit-todo"></i> <i class="fa-solid fa-trash"></i>';
-
-      todoDiv.appendChild(iconsDiv);
-      todoListDiv.appendChild(todoDiv);
-
+      todoListDiv.insertAdjacentHTML('beforeend', template);
     })
 
-    todoContainer.appendChild(addTodoButton);
-    todoContainer.appendChild(todoListDiv);
+    todoContainer.innerHTML = '';
+    todoContainer.insertAdjacentHTML('beforeend', addTodoTemplate);
+    todoContainer.insertAdjacentElement('beforeend', todoListDiv);
 
+    addAddNewTodoEventListener();
     addToggleTodoDetailsEventListeners();
-    addDeleteTodoEventListeners();
     addToggleCompleteTodoEventListeners();
+    addDeleteTodoEventListeners();
     addEditTodoEventListeners();
   }
 
@@ -289,6 +273,14 @@ const dom = (() => {
       submitButton.setAttribute('id', 'edit-todo-submit-button');
       addTodoFormDiv.setAttribute('data-todo-index', todoIndex);
     }
+  }
+
+  function addAddNewProjectEventListener () {
+    document.querySelector('.add-project-button').addEventListener('click', handlers.openAddProjectForm);
+  }
+
+  function addAddNewTodoEventListener () {
+    document.querySelector('.add-todo-button').addEventListener('click', handlers.openAddTodoForm);
   }
 
   function addSelectProjectEventListeners () {
