@@ -1,5 +1,4 @@
 import projects from './projects';
-import todos from './todos';
 import handlers from './handlers';
 
 const dom = (() => {
@@ -83,72 +82,51 @@ const dom = (() => {
   function renderTodoDetails (todoDiv, projectIndex, todoIndex) {
     const todo = projects.projectList[projectIndex].todos[todoIndex];
 
-    const detailsTemplate = `<div class="todo-details"><div class="todo-details-title"><span class="details-label">Title: </span>${todo.title}</div><div class="todo-details-description"><span class="details-label">Description: </span>${todo.description}</div><div class="todo-details-due-date"><span class="details-label">Due Date: </span>${todo.dueDate}</div><div class="todo-details-priority"><span class="details-label">Priority: </span>${todo.priority}</div><div class="todo-details-completed"><span class="details-label">Completed: </span>${todo.completed ? `Yes` : `No`}</div>`
+    const detailsTemplate = `
+      <div class="todo-details">
+        <div class="todo-details-title"><span class="details-label">Title: </span>${todo.title}</div>
+        <div class="todo-details-description"><span class="details-label">Description: </span>${todo.description}</div>
+        <div class="todo-details-due-date"><span class="details-label">Due Date: </span>${todo.dueDate}</div>
+        <div class="todo-details-priority"><span class="details-label">Priority: </span>${todo.priority}</div>
+        <div class="todo-details-completed"><span class="details-label">Completed: </span>${todo.completed ? `Yes` : `No`}</div>
+      </div>`
 
     todoDiv.insertAdjacentHTML('afterend', detailsTemplate);
   }
 
   function renderAddProjectForm(projectIndex) {
-    const addProjectFormDiv = document.createElement('div');
-    addProjectFormDiv.setAttribute('id', 'add-project-form');
+    const template = `
+      <div id="add-project-form">
+        <i class="fa-solid fa-xmark"></i>
+        <form id="form">
+          <div class="form-item>
+            <label for="title>Project title:</label>
+            <input type="text" id="title" name="title" required>
+            <button class="submit-button">Submit</button>
+          </div>
+        </form>
+      </div>`
 
-    const closeButton = document.createElement('img');
-    closeButton.setAttribute('src', './img/close-light.svg');
-    closeButton.setAttribute('class', 'close-button');
-    closeButton.addEventListener('click', handlers.closeAddProjectForm);
-
-    const addProjectForm = document.createElement('form');
-    addProjectForm.setAttribute('action', '#');
-    addProjectForm.setAttribute('id', 'form');
-
-    const addProjectTitle = document.createElement('div');
-    addProjectTitle.setAttribute('class', 'form-item');
-
-    const addProjectTitleLabel = document.createElement('label');
-    addProjectTitleLabel.setAttribute('for', 'title');
-
-    const projectTitleLabel = document.createTextNode('Project title:');
-    addProjectTitleLabel.appendChild(projectTitleLabel);
-
-    const addProjectTitleInput = document.createElement('input');
-    addProjectTitleInput.setAttribute('type', 'text');
-    addProjectTitleInput.setAttribute('id', 'title');
-    addProjectTitleInput.setAttribute('name', 'title');
-    addProjectTitleInput.required = true;
-
-    const submitButton = document.createElement('button');
-    submitButton.setAttribute('class', 'submit-button');
-
-    const submitText = document.createTextNode('Submit');
-    submitButton.appendChild(submitText);
-
-    addProjectTitle.appendChild(addProjectTitleLabel);
-    addProjectTitle.appendChild(addProjectTitleInput);
-
-    addProjectForm.appendChild(addProjectTitle);
-    addProjectForm.appendChild(submitButton);
-
-    addProjectFormDiv.appendChild(closeButton);
-    addProjectFormDiv.appendChild(addProjectForm);
-
-    contentDiv.appendChild(addProjectFormDiv);
+    contentDiv.insertAdjacentHTML('beforeend', template);
 
     if (arguments.length === 1) {
       const project = projects.projectList[projectIndex];
-      addProjectTitleInput.value = project.title
+      const addProjectTitleInput = document.querySelector('input[id=title]');
+      const submitButton = document.querySelector('.submit-button');
+      const addProjectFormDiv = document.querySelector('#add-project-form');
 
+      addProjectTitleInput.value = project.title;
       submitButton.setAttribute('id', 'edit-project-submit-button');
       addProjectFormDiv.setAttribute('data-project-index', projectIndex);
     }
 
-    submitButton.addEventListener('click', function (e) {
+    document.querySelector('.submit-button').addEventListener('click', (e) => {
       if (e.target.id === 'edit-project-submit-button') {
         handlers.submitProjectForm(e, projectIndex);
       } else {
         handlers.submitProjectForm(e);
       }
-      
-    });
+    })
   }
 
   function renderAddTodoForm(projectIndex, todoIndex) {

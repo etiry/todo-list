@@ -89,7 +89,8 @@ h1 {
   font-family: "Barlow", sans-serif;
   font-size: 18px;
   display: grid;
-  place-items: center;
+  justify-items: end;
+  align-items: center;
 }
 
 .add-project-button,
@@ -146,13 +147,6 @@ select {
   display: flex;
   align-items: center;
   margin: 8px;
-}
-
-.close-button {
-  width: 25px;
-  display: flex;
-  justify-self: end;
-  /* margin-bottom: -24px; */
 }
 
 .fa-regular,

@@ -12,8 +12,11 @@ const projects = (() => {
 
   function addProject(title) {
     const project = new Project(title);
+
     projectList.push(project);
     project.projectIndex = projectList.indexOf(project);
+
+    localStorage.setItem('projects', JSON.stringify(projectList));
   }
 
   function getProjectIndex(titleInput) {
