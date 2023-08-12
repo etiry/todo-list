@@ -97,13 +97,13 @@ const dom = (() => {
   function renderAddProjectForm(projectIndex) {
     const template = `
       <div id="add-project-form">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark close-project-button"></i>
         <form id="form">
           <div class="form-item>
             <label for="title>Project title:</label>
             <input type="text" id="title" name="title" required>
-            <button class="submit-button">Submit</button>
           </div>
+          <button class="submit-project-button">Submit</button>
         </form>
       </div>`
 
@@ -120,7 +120,8 @@ const dom = (() => {
       addProjectFormDiv.setAttribute('data-project-index', projectIndex);
     }
 
-    document.querySelector('.submit-button').addEventListener('click', (e) => {
+    document.querySelector('.close-project-button').addEventListener('click', handlers.closeAddProjectForm);
+    document.querySelector('.submit-project-button').addEventListener('click', (e) => {
       if (e.target.id === 'edit-project-submit-button') {
         handlers.submitProjectForm(e, projectIndex);
       } else {
@@ -130,119 +131,45 @@ const dom = (() => {
   }
 
   function renderAddTodoForm(projectIndex, todoIndex) {
-    const addTodoFormDiv = document.createElement('div');
-    addTodoFormDiv.setAttribute('id', 'add-todo-form');
+    const template = `
+      <div id="add-todo-form">
+        <i class="fa-solid fa-xmark close-todo-button"></i>
+        <form id="form">
+          <div class="form-item">
+            <label for="title">Todo title:</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+          <div class="form-item">
+            <label for="description">Todo description:</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <div class="form-item">
+            <label for="due-date">Todo due date:</label>
+            <input type="date" id="due-date" name="due-date">
+          </div>
+          <div class="form-item">
+            <label for="priority">Todo priority:</label>
+            <select id="priority" name="priority">
+              <option value="Not urgent">Not urgent</option>
+              <option value="Normal">Normal</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+          </div>
+          <button class="submit-todo-button">Submit</button>
+        </form>
+      </div>`
 
-    const closeButton = document.createElement('img');
-    closeButton.setAttribute('src', './img/close-light.svg');
-    closeButton.setAttribute('class', 'close-button');
-    closeButton.addEventListener('click', handlers.closeAddTodoForm);
-
-    const addTodoForm = document.createElement('form');
-    addTodoForm.setAttribute('action', '#');
-    addTodoForm.setAttribute('id', 'form');
-
-    // title
-    const addTodoTitle = document.createElement('div');
-    addTodoTitle.setAttribute('class', 'form-item');
-
-    const addTodoTitleLabel = document.createElement('label');
-    addTodoTitleLabel.setAttribute('for', 'title');
-
-    const todoTitleLabel = document.createTextNode('Todo title:');
-    addTodoTitleLabel.appendChild(todoTitleLabel);
-
-    const addTodoTitleInput = document.createElement('input');
-    addTodoTitleInput.setAttribute('type', 'text');
-    addTodoTitleInput.setAttribute('id', 'title');
-    addTodoTitleInput.setAttribute('name', 'title');
-    addTodoTitleInput.required = true;
-
-    // description
-    const addTodoDescription = document.createElement('div');
-    addTodoDescription.setAttribute('class', 'form-item');
-
-    const addTodoDescriptionLabel = document.createElement('label');
-    addTodoDescriptionLabel.setAttribute('for', 'description');
-
-    const todoDescriptionLabel = document.createTextNode('Todo description:');
-    addTodoDescriptionLabel.appendChild(todoDescriptionLabel);
-
-    const addTodoDescriptionInput = document.createElement('textarea');
-    addTodoDescriptionInput.setAttribute('id', 'description');
-    addTodoDescriptionInput.setAttribute('name', 'description');
-
-    // due date
-    const addTodoDueDate = document.createElement('div');
-    addTodoDueDate.setAttribute('class', 'form-item');
-
-    const addTodoDueDateLabel = document.createElement('label');
-    addTodoDueDateLabel.setAttribute('for', 'due-date');
-
-    const todoDueDateLabel = document.createTextNode('Todo due date:');
-    addTodoDueDateLabel.appendChild(todoDueDateLabel);
-
-    const addTodoDueDateInput = document.createElement('input');
-    addTodoDueDateInput.setAttribute('type', 'date');
-    addTodoDueDateInput.setAttribute('id', 'due-date');
-    addTodoDueDateInput.setAttribute('name', 'due-date');
-
-    // priority
-    const addTodoPriority = document.createElement('div');
-    addTodoPriority.setAttribute('class', 'form-item');
-
-    const addTodoPriorityLabel = document.createElement('label');
-    addTodoPriorityLabel.setAttribute('for', 'priority');
-
-    const todoPriorityLabel = document.createTextNode('Todo priority:');
-    addTodoPriorityLabel.appendChild(todoPriorityLabel);
-
-    const addTodoPriorityInput = document.createElement('select');
-    addTodoPriorityInput.setAttribute('id', 'priority');
-    addTodoPriorityInput.setAttribute('name', 'priority');
-
-    const options = ['Not urgent', 'Normal', 'Urgent'];
-    options.forEach(function (option) {
-      let opt = document.createElement('option');
-      opt.setAttribute('value', option);
-      let val = document.createTextNode(option);
-      opt.appendChild(val);
-      addTodoPriorityInput.appendChild(opt);
-    })
-
-    const submitButton = document.createElement('button');
-    submitButton.setAttribute('class', 'submit-button');
-
-    const submitText = document.createTextNode('Submit');
-    submitButton.appendChild(submitText);
-
-    submitButton.addEventListener('click', handlers.submitTodoForm);
-
-    addTodoTitle.appendChild(addTodoTitleLabel);
-    addTodoTitle.appendChild(addTodoTitleInput);
-
-    addTodoDescription.appendChild(addTodoDescriptionLabel);
-    addTodoDescription.appendChild(addTodoDescriptionInput);
-
-    addTodoDueDate.appendChild(addTodoDueDateLabel);
-    addTodoDueDate.appendChild(addTodoDueDateInput);
-
-    addTodoPriority.appendChild(addTodoPriorityLabel);
-    addTodoPriority.appendChild(addTodoPriorityInput);
-
-    addTodoForm.appendChild(addTodoTitle);
-    addTodoForm.appendChild(addTodoDescription);
-    addTodoForm.appendChild(addTodoDueDate);
-    addTodoForm.appendChild(addTodoPriority);
-    addTodoForm.appendChild(submitButton);
-
-    addTodoFormDiv.appendChild(closeButton);
-    addTodoFormDiv.appendChild(addTodoForm);
-
-    contentDiv.appendChild(addTodoFormDiv);
+    contentDiv.insertAdjacentHTML('beforeend', template);
 
     if (arguments.length === 2) {
       const todo = projects.projectList[projectIndex].todos[todoIndex];
+      const addTodoTitleInput = document.querySelector("#title");
+      const addTodoDescriptionInput = document.querySelector("#description");
+      const addTodoDueDateInput = document.querySelector('#due-date');
+      const addTodoPriorityInput = document.querySelector('#priority');
+      const submitButton = document.querySelector('.submit-button');
+      const addTodoFormDiv = document.querySelector('#add-todo-form');
+
       addTodoTitleInput.value = todo.title;
       addTodoDescriptionInput.value = todo.description;
       addTodoDueDateInput.value = todo.dueDate;
@@ -251,6 +178,9 @@ const dom = (() => {
       submitButton.setAttribute('id', 'edit-todo-submit-button');
       addTodoFormDiv.setAttribute('data-todo-index', todoIndex);
     }
+
+    document.querySelector('.close-todo-button').addEventListener('click', handlers.closeAddTodoForm);
+    document.querySelector('.submit-todo-button').addEventListener('click', handlers.submitTodoForm);
   }
 
   function addAddNewProjectEventListener () {
