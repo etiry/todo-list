@@ -89,8 +89,11 @@ h1 {
   font-family: "Barlow", sans-serif;
   font-size: 18px;
   display: grid;
-  justify-items: end;
-  align-items: center;
+}
+
+.close-project-button,
+.close-todo-button {
+  justify-self: end;
 }
 
 .add-project-button,
@@ -128,7 +131,8 @@ select {
   font-family: "Barlow", sans-serif;
 }
 
-.submit-button {
+.submit-project-button,
+.submit-todo-button {
   padding: 8px 16px;
   border: none;
   border-radius: 8px;
@@ -138,7 +142,8 @@ select {
   font-size: 16px;
 }
 
-.submit-button:hover {
+.submit-project-button:hover,
+.submit-todo-button:hover {
   background-color: #4a4e69;
   color: #f2e9e4;
 }
@@ -154,7 +159,12 @@ select {
   margin: 4px 8px;
 }
 
+.fa-plus {
+  font-size: 24px;
+}
+
 .todo-details {
+  display: none;
   padding: 8px;
   margin-left: 8px;
   border-bottom: solid 1px #22223b;

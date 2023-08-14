@@ -63,6 +63,8 @@ const dom = (() => {
           <div class="icons">
             <i class="fa-regular fa-circle-check"></i> <i class="fa-solid fa-pen-to-square edit-todo"></i> <i class="fa-solid fa-trash"></i>
           </div>
+        </div>
+        <div class="todo-details">
         </div>`
 
       todoListDiv.insertAdjacentHTML('beforeend', template);
@@ -83,15 +85,14 @@ const dom = (() => {
     const todo = projects.projectList[projectIndex].todos[todoIndex];
 
     const detailsTemplate = `
-      <div class="todo-details">
-        <div class="todo-details-title"><span class="details-label">Title: </span>${todo.title}</div>
-        <div class="todo-details-description"><span class="details-label">Description: </span>${todo.description}</div>
-        <div class="todo-details-due-date"><span class="details-label">Due Date: </span>${todo.dueDate}</div>
-        <div class="todo-details-priority"><span class="details-label">Priority: </span>${todo.priority}</div>
-        <div class="todo-details-completed"><span class="details-label">Completed: </span>${todo.completed ? `Yes` : `No`}</div>
-      </div>`
+      <div class="todo-details-title"><span class="details-label">Title: </span>${todo.title}</div>
+      <div class="todo-details-description"><span class="details-label">Description: </span>${todo.description}</div>
+      <div class="todo-details-due-date"><span class="details-label">Due Date: </span>${todo.dueDate}</div>
+      <div class="todo-details-priority"><span class="details-label">Priority: </span>${todo.priority}</div>
+      <div class="todo-details-completed"><span class="details-label">Completed: </span>${todo.completed ? `Yes` : `No`}</div>`
 
-    todoDiv.insertAdjacentHTML('afterend', detailsTemplate);
+    todoDiv.nextElementSibling.innerHTML = detailsTemplate;
+    todoDiv.nextElementSibling.style.display = 'block';
   }
 
   function renderAddProjectForm(projectIndex) {
@@ -112,7 +113,7 @@ const dom = (() => {
     if (arguments.length === 1) {
       const project = projects.projectList[projectIndex];
       const addProjectTitleInput = document.querySelector('input[id=title]');
-      const submitButton = document.querySelector('.submit-button');
+      const submitButton = document.querySelector('.submit-project-button');
       const addProjectFormDiv = document.querySelector('#add-project-form');
 
       addProjectTitleInput.value = project.title;
@@ -167,7 +168,7 @@ const dom = (() => {
       const addTodoDescriptionInput = document.querySelector("#description");
       const addTodoDueDateInput = document.querySelector('#due-date');
       const addTodoPriorityInput = document.querySelector('#priority');
-      const submitButton = document.querySelector('.submit-button');
+      const submitButton = document.querySelector('.submit-todo-button');
       const addTodoFormDiv = document.querySelector('#add-todo-form');
 
       addTodoTitleInput.value = todo.title;

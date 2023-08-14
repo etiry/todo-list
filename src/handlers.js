@@ -114,32 +114,30 @@ const handlers = (() => {
       e.target.classList.add('fa-regular');
     }
 
+    const todoDiv = e.target.parentElement.parentElement;
     const todoIndex = e.target.parentElement.parentElement.dataset.todoIndex;
     const projectIndex = e.target.parentElement.parentElement.dataset.projectIndex;
 
     todos.toggleComplete(projectIndex, todoIndex);
     localStorage.setItem('projects', JSON.stringify(projects.projectList));
+    if (todoDiv.nextElementSibling.children.length !== 0) {
+      dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
+    }
   }
 
   function toggleTodoDetails (e) {
     if (e.target.classList.contains('todo-name')) {
       const todoDiv = e.target;
-
-      if (todoDiv.nextElementSibling) {
-        if (todoDiv.nextElementSibling.classList.contains('todo-details')) {
-        todoDiv.nextElementSibling.remove();
+      if (todoDiv.nextElementSibling.children.length !== 0) {
+        todoDiv.nextElementSibling.replaceChildren();
+        todoDiv.nextElementSibling.style.display = 'none';
       } else {
         const todoIndex = e.target.dataset.todoIndex;
         const projectIndex = e.target.dataset.projectIndex;
         dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
       }
-    } else {
-      const todoIndex = e.target.dataset.todoIndex;
-      const projectIndex = e.target.dataset.projectIndex;
-      dom.renderTodoDetails(todoDiv, projectIndex, todoIndex);
     }
   }
-}
 
   return {
     selectProject,
